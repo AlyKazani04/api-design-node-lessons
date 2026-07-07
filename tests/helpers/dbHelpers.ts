@@ -1,12 +1,12 @@
 import { PassThrough } from 'stream';
 import { db } from '../../src/db/connection.ts'
-import { users, habits, entries, type NewUser, type NewHabit, habitTags } from '../../src/db/schema.ts';
+import { users, habits, entries, type NewUser, type NewHabit, habitTags, tags } from '../../src/db/schema.ts';
 import { generateToken } from '../../src/utils/jwt.ts';
 import { hashPassword } from '../../src/utils/passwords.ts';
 
 export const createTestUser = async (userData: Partial<NewUser> = {}) => {
   const defaultData = {
-    email: `test=${Date.now()}-${Math.random()}@example.com`,
+    email: `test-${Date.now()}-${Math.random()}@example.com`,
     username: `testuser-${Date.now()}-${Math.random()}`,
     password: `adminpassword1234`,
     firstName: 'test',
@@ -55,4 +55,5 @@ export const cleanUpDatabase = async () => {
   await db.delete(users);
   await db.delete(entries);
   await db.delete(habitTags);
+  await db.delete(tags)
 };

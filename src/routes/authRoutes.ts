@@ -5,9 +5,8 @@ import { insertUserSchema } from '../db/schema.ts';
 import { z } from 'zod';
 
 const loginSchema = z.object({
-  email: z.email('Invalid Email'),
+  email: z.email({ error: 'Invalid Email' }),
   password: z.string().min(1, 'Password is required'),
-
 })
 
 const router = Router();

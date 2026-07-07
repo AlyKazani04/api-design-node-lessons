@@ -67,7 +67,7 @@ export const login = async (req: Request, res: Response) => {
       username: user.username,
     })
 
-    return res.json({
+    return res.status(200).json({
       message: 'Login Success',
       user: {
         id: user.id,
@@ -78,7 +78,7 @@ export const login = async (req: Request, res: Response) => {
         createdAt: user.created_at
       },
       token
-    }).status(201);
+    });
   } catch (e) {
     console.error('Login Error', e);
     res.status(500).json({ error: 'Failed to login' });
